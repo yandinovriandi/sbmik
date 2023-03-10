@@ -12,7 +12,7 @@
                     <a type="button" class="dropdown-item text-success create-profile-hotspot" data-toggle="modal" data-target="#modalProfileHotspot">
                         <i class="fas fa-user-plus"></i> user profile
                     </a>
-                    <a class="dropdown-item text-success edit-layanan" href=""><i class="fas fa-external-link-alt"></i> Open </a>
+                    <a class="dropdown-item text-success edit-layanan" href="{{route('hotspot.profile',$mikrotik)}}"><i class="fas fa-external-link-alt"></i> List Profile </a>
                     <a type="button" class="dropdown-item text-warning edit-layanan" href="{{route('mikrotik.edit',$mikrotik)}}"><i class="far fa-edit"></i> Perbarui </a>
                     <a type="button" class="dropdown-item text-danger hapus-mikrotik" href="javascript:void(0)" data-id="{{$mikrotik->slug}}" ><i class="far fa-trash-alt"></i> Hapus</a>
                 </div>

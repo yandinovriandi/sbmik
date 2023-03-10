@@ -51,6 +51,8 @@ Route::middleware('auth')->group(function (){
                 ->name('index');
             Route::post('mikrotik/router/user/profile/add/{mikrotik:slug}','createUserProfile')
                 ->name('user.profile.add');
+            Route::get('mikrotik/router/user/profile/{mikrotik:slug}','getProfile')
+                ->name('profile');
         });
 });
 Route::middleware('auth')->group(function () {

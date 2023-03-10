@@ -3,108 +3,92 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalProfileHotspotLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="modalProfileHotspotLabel">Add User Profile</h5>
             </div>
-            <form action="" id="formUserProfile">
+            <form id="formUserProfile">
                 <div class="modal-body">
-                 <div class="row">
-                     <div class="col-md-6">
-                         <div class="form-group">
-                             <label for="name" class="form-label">Profile Name</label>
-                             <input type="text" name="name" id="name" class="form-control" placeholder="1000">
-                         </div>
-                     </div>
-                     <div class="col-md-6">
-                         <div class="form-group">
-                             <label for="address_pool" class="form-select-label">Address Pool</label>
-                             <select name="address_pool" id="address_pool" class="form-control">
-                                 <option selected>none</option>
-                                 @foreach($pools as $pool)
-                                     <option value="{{$pool['name']}}">{{$pool['name']}}</option>
-                                 @endforeach
-                             </select>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="shared_users" class="form-label">Shared Users</label>
-                                <input type="number" value="1" name="shared_users" id="shared_users" class="form-control">
-                            </div>
-                        </div>
-                     <div class="col-md-6">
-                         <div class="form-group">
-                             <label for="rate_limit" class="form-label">Rate Limit UP/DOWN</label>
-                             <input type="text" name="rate_limit" id="rate_limit" class="form-control" placeholder="Example 2M/2M or 2M/2M 3M/3M 1536k/1536k 16/16 8 1M/1M">
-                         </div>
-                     </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="expired_mode" class="form-label">Expired Mode</label>
-                                <select type="text" name="expired_mode" id="expired_mode" class="form-control">
-                                    <option selected disabled>Choose Expired Type</option>
-                                    <option value="0">None</option>
-                                    <option value="rem">Remove</option>
-                                    <option value="ntf">Notice</option>
-                                    <option value="remc">Remove &amp; Record</option>
-                                    <option value="ntfc">Notice &amp; Record</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="validity" class="form-label d-none" id="validity-label">Validity</label>
-                                <input type="hidden" class="form-control" id="graceperiod" name="graceperiod" value="5m">
-                                <input type="text" name="validity" id="validity" class="form-control d-none" placeholder="Example 1h 1d 1w">
-                            </div>
+                    <div class="mb-3 row">
+                        <label for="pname" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="pname" name="pname" required>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="price" class="form-label">Price</label>
-                                <input type="number" name="price" id="price" class="form-control" placeholder="Rp. 2000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="selling_price" class="form-label">Selling Price</label>
-                                <input type="number" name="selling_price" id="selling_price" class="form-control" placeholder="Rp. 2500">
-                            </div>
+                    <div class="mb-3 row">
+                        <label for="ppool" class="col-sm-2 col-form-label">Address Pool</label>
+                        <div class="col-sm-10">
+                            <select class="form-control " id="ppool" name="ppool">
+                                <option value="none" selected>none</option>
+{{--                               @foreach($pools as $pool)--}}
+{{--                                    <option value="{{$pool['name']}}">{{$pool['name']}}</option>--}}
+{{--                               @endforeach--}}
+                            </select>
                         </div>
                     </div>
-                 <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="lock_user" class="form-label">Lock Mac</label>
-                                <select type="text" name="lock_user" id="lock_user" class="form-control">
-                                    <option value="disable">Disable</option>
-                                    <option value="enable">Enable</option>
-                                </select>
-                            </div>
+                    <div class="mb-3 row">
+                        <label for="pshared" class="col-sm-2 col-form-label">Shared User</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="pshared" name="pshared">
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="parent" class="form-label">Parent Queue</label>
-                                <select type="parent" name="parent" id="parent" class="form-control">
-                                    <option value="none">none</option>
-                                    @foreach($simplequeue as $sq)
-                                        <option value="{{$sq['name']}}">{{$sq['name']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="plimit" class="col-sm-2 col-form-label">Rate Limit</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="plimit" name="plimit">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="pexpmode" class="col-sm-2 col-form-label">Expired Mode</label>
+                        <div class="col-sm-10">
+                            <select class="form-control " id="pexpmode" name="pexpmode">
+                                <option value="0" selected>none</option>
+                                <option value="rem">Remove</option>
+                                <option value="remc">Remove & Record</option>
+                                <option value="ntf">Notice</option>
+                                <option value="ntfc">Notice & Record</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" id="dvalidity" style="display: none;">
+                        <label for="pvalidity" class="col-sm-2 col-form-label">Masa Aktif</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="pvalidity" name="pvalidity">
+                            <input type="hidden" class="form-control" id="graceperiod" name="graceperiod" value="5m">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="pprice" class="col-sm-2 col-form-label">Price</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="pprice" name="pprice">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="psellingprice" class="col-sm-2 col-form-label">Selling Price</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="psellingprice" name="psellingprice">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="plock" class="col-sm-2 col-form-label">Lock User</label>
+                        <div class="col-sm-10">
+                            <select class="form-control " id="plock" name="plock">
+                                <option value="Disable">Disable</option>
+                                <option value="Enable">Enable</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="pqueue" class="col-sm-2 col-form-label">Parent Queue</label>
+                        <div class="col-sm-10">
+                            <select class="form-control " id="pqueue" name="pqueue">
+                                <option selected>none</option>
+{{--                               @foreach($simplequeue as $sq)--}}
+{{--                                    <option value="{{$sq['name']}}">{{$sq['name']}}</option>--}}
+{{--                                @endforeach--}}
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-sm btn-primary simpan-profile">Simpan</button>
                 </div>
             </form>
@@ -113,22 +97,16 @@
 </div>
  @pushonce('custom_scripts')
      <script>
-         // Ambil element select box expired_mode dan input validity
-         const selectExpiredMode = document.getElementById('expired_mode');
-         const inputValidity = document.getElementById('validity');
-         const labelValidity = document.querySelector('label[for="validity"]');
-
-         // Tambahkan event listener pada select box
-         selectExpiredMode.addEventListener('change', function() {
-             // Jika opsi Remove atau Record dipilih, tampilkan input validity dan label validity
-             if (this.value === 'remove' || this.value === 'remc') {
-                 inputValidity.classList.remove('d-none');
-                 labelValidity.classList.remove('d-none');
-             }
-             // Jika opsi lain yang dipilih, sembunyikan input validity dan label validity
-             else {
-                 inputValidity.classList.add('d-none');
-                 labelValidity.classList.add('d-none');
+         // $("form[name='formadd']").submit(function(){
+         //     $("#buttonadd").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Process...');
+         //     $("#buttonadd").prop("disabled", true);
+         //     $("form[name='formadd']")[0].submit();
+         // });
+         $("#pexpmode").change(function() {
+             if ($('#pexpmode').val() == '0') {
+                 $('#dvalidity').hide();
+             } else {
+                 $('#dvalidity').show();
              }
          });
      </script>

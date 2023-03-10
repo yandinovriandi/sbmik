@@ -75,7 +75,7 @@ class HotspotRepository
      */
     public function getProfiles()
     {
-        $client = $this->getMikrotikBySlug();
+        $client = $this->getMikrotik();
         $query = new Query('/ip/hotspot/user/profile/print');
         return $client->query($query)->read();
     }
@@ -145,31 +145,52 @@ class HotspotRepository
      * @throws ConfigException
      */
     public function addUserProfile(
-        $name,
-        $hsPool,
-        $validity,
-        $sharedUsers,
-        $speedLimit,
-        $parent,
-        $onlogin
+        $name,$addrpool,$ratelimit,$sharedusers,$onlogin,$parent,$validity
     )
 
     {
         $client = $this->getMikrotik();
         $query = new Query('/ip/hotspot/user/profile/add');
         $query->equal('name', $name);
-        $query->equal('address-pool', $hsPool);
+        $query->equal('address-pool',$addrpool);
+        $query->equal('shared-users', $sharedusers);
         $query->equal('session-timeout', $validity);
-        $query->equal('shared-users', $sharedUsers);
-        $query->equal('rate-limit', $speedLimit);
-        $query->equal('status-autorefresh', '1m');
         $query->equal('keepalive-timeout', $validity);
+        $query->equal('rate-limit', $ratelimit);
+        $query->equal('status-autorefresh', '1m');
         $query->equal('on-login', $onlogin);
         $query->equal('parent-queue', $parent);
         return $client->query($query)->read();
     }
 
+    /**
+     * @throws ClientException
+     * @throws ConnectException
+     * @throws BadCredentialsException
+     * @throws QueryException
+     * @throws ConfigException
+     */
+    public function getUserProfile()
+    {
+        $client = $this->getMikrotikBySlug();
+        $query = new Query('/ip/hotspot/user/profile/print');
+        return $client->query($query)->read();
+    }
 
+    /**
+     * @throws ClientException
+     * @throws ConnectException
+     * @throws BadCredentialsException
+     * @throws QueryException
+     * @throws ConfigException
+     */
+    public function removeUserProfile($pname)
+    {
+        $client = $this->getMikrotikBySlug();
+        $query = new Query('/ip/hotspot/user/profile/remove');
+        $query->equal('name',$pname);
+        return $client->query($query)->read();
+    }
     /**
      * @throws ClientException
      * @throws ConnectException
@@ -267,6 +288,18 @@ class HotspotRepository
         $client = $this->getMikrotikBySlug();
         $query = new Query('/ip/pool/print');
         return $client->query($query)->read();
+    }
+
+    /**
+     * @throws ClientException
+     * @throws ConnectException
+     * @throws QueryException
+     * @throws BadCredentialsException
+     * @throws ConfigException
+     */
+    public function getRateLimit(mixed $name)
+    {
+        $this->getUserProfile();
     }
 
 }

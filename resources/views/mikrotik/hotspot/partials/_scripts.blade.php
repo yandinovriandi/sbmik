@@ -129,63 +129,35 @@
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
-
-    $('.simpan-profile').click(function() {
-        var name = $('#name').val();
-        var address_pool = $('#address_pool').val();
-        var shared_users = $('#shared_users').val();
-        var rate_limit = $('#rate_limit').val();
-        var expired_mode = $('#expired_mode').val();
-        var validity = $('#validity').val();
-        var price = $('#price').val();
-        var selling_price = $('#selling_price').val();
-        var lock_user = $('#lock_user').val();
-        var parent = $('#parent').val();
-
-        // validasi input
-        if (!name || !address_pool || !shared_users || !rate_limit || !expired_mode || !price || !selling_price || !lock_user) {
-            alert('Semua field harus diisi!');
-            return;
-        }
-
-        // buat objek data untuk dikirim ke server
-        var data = {
-            name: name,
-            address_pool: address_pool,
-            shared_users: shared_users,
-            rate_limit: rate_limit,
-            expired_mode: expired_mode,
-            price: price,
-            selling_price: selling_price,
-            lock_user: lock_user,
-            parent: parent
-        };
-
-        // tambahkan field validity ke objek data jika expired_mode tidak bernilai "none"
-        if (expired_mode !== 'none') {
-            if (!validity) {
-                alert('Field Validity harus diisi!');
-                return;
-            }
-            data.validity = validity;
-        }
-
-        // kirim permintaan AJAX ke server
+    function notifikasi(status, title, message) {
+        new Notify({
+            status: status,
+            title: title,
+            text: message,
+            effect: 'slide',
+            speed: 500,
+            showCloseButton: true,
+            autotimeout: 5000,
+            autoclose: true,
+        });
+    }
+    $(document).on('click', '.simpan-profile', function(e){
+        e.preventDefault();
+        var form = $('#formUserProfile');
+        var url = "{{route('hotspot.user.profile.add',$mikrotik)}}";
         $.ajax({
+            url: url,
             type: 'POST',
-            url: "{{route('hotspot.user.profile.add',$mikrotik)}}",
-            data: data,
-            success: function(response) {
-                console.log(response)
-                alert('Profil hotspot berhasil disimpan!');
-                $('#modalProfileHotspot').modal('hide');
+            data: form.serialize(),
+            dataType: 'json',
+            success: function(response){
+                // berikan respon sukses kepada pengguna
+                notifikasi(response.status,response.message,response.title)
             },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                alert('Terjadi kesalahan saat menyimpan profil hotspot!');
+            error: function(response){
+                // berikan pesan kesalahan kepada pengguna
+                notifikasi(response.status,response.message,response.title)
             }
         });
     });
-
-
 </script>

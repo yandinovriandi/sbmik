@@ -53,6 +53,10 @@ Route::middleware('auth')->group(function (){
                 ->name('user.profile.add');
             Route::get('mikrotik/router/user/profile/{mikrotik:slug}','getProfile')
                 ->name('profile');
+            Route::put('mikrotik/router/user/profile/{mikrotik:slug}/update','updateProfile')
+                ->name('profile.update');
+            Route::delete('mikrotik/router/user/profile/{mikrotik:slug}/delete','destroy')
+                ->name('profile.delete');
         });
 });
 Route::middleware('auth')->group(function () {

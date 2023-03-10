@@ -35,7 +35,11 @@ class MikrotikController extends Controller
                 })->editColumn('username', function ($data) {
                     return '<span class="badge badge-info" data-toggle="tooltip" data-original-title="Username">'.$data->username.'</span>';
                 })->editColumn('password', function ($data) {
-                    return '<span class="badge badge-primary" data-toggle="tooltip" data-original-title="Password">'.$data->password.'</span>';
+                    $password = $data->password; // Mengambil nilai password dari objek $data
+                    $showDigits = 4; // Ganti dengan jumlah digit yang ingin ditampilkan
+
+                    $displayPassword = substr($password, 0, -$showDigits) . str_repeat('*', $showDigits); // Mengubah beberapa digit terakhir password menjadi bintang
+                    return '<span class="badge badge-primary" data-toggle="tooltip" data-original-title="Password">'.$displayPassword.'</span>'; // Mengembalikan tampilan password yang sudah dimodifikasi
                 })->editColumn('port', function ($data) {
                     return '<span class="badge badge-success" data-toggle="tooltip" data-original-title="Port Mikrotik">'.$data->port.'</span>';
                 })->addColumn('action',function ($data){
@@ -133,15 +137,4 @@ class MikrotikController extends Controller
         $mikrotik->delete();
     }
 
-    /**
-     * @throws ClientException
-     * @throws ConnectException
-     * @throws BadCredentialsException
-     * @throws QueryException
-     * @throws ConfigException
-     */
-    public function hotspotActive()
-    {
-        return $this->hotspotRepository->countHotspotActive();
-    }
 }

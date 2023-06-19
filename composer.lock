@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63e9d480a1d6a6af180c7c3446ef1b92",
+    "content-hash": "bad0a781718b90745ca20e0629c5a26b",
     "packages": [
         {
             "name": "brick/math",
@@ -7102,50 +7102,6 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2023-03-01T23:07:57+00:00"
-        },
-        {
-            "name": "laraveldaily/larastarters",
-            "version": "2.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/LaravelDaily/Larastarters.git",
-                "reference": "85934e470d8031ebd38afef3a747bf64b5a311a4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/LaravelDaily/Larastarters/zipball/85934e470d8031ebd38afef3a747bf64b5a311a4",
-                "reference": "85934e470d8031ebd38afef3a747bf64b5a311a4",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "LaravelDaily\\Larastarters\\LarastartersServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "LaravelDaily\\Larastarters\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Povilas Korop",
-                    "email": "povilas@laraveldaily.com"
-                }
-            ],
-            "description": "Laravel Starter Kits with extra functions",
-            "support": {
-                "issues": "https://github.com/LaravelDaily/Larastarters/issues",
-                "source": "https://github.com/LaravelDaily/Larastarters/tree/2.3.0"
-            },
-            "time": "2023-02-19T07:24:32+00:00"
         },
         {
             "name": "mockery/mockery",

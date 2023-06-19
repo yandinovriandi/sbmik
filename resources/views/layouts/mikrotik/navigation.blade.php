@@ -13,8 +13,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item @if(request()->routeIs('dashboard')) active @endif">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+    <li class="nav-item @if(request()->routeIs('home')) active @endif">
+        <a class="nav-link" href="{{ route('home') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{{ __('Dashboard') }}</span></a>
     </li>
@@ -28,6 +28,14 @@
             <span>{{ __('Users') }}</span></a>
     </li>
 
+    <li class="nav-item @if(request()->routeIs('about')) active @endif">
+        <a class="nav-link" href="{{ route('about') }}">
+            <i class="fas fa-fw fa-eye"></i>
+            <span>{{ __('About') }}</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
@@ -43,8 +51,10 @@
         </div>
     </li>
 
+    <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline pt-4">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
 </ul>
+<!-- End of Sidebar -->

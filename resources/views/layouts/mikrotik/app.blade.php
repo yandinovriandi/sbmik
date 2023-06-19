@@ -26,9 +26,9 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-@include('layouts.navigation')
+    @include('layouts.navigation')
 
-<!-- Content Wrapper -->
+    <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
@@ -73,7 +73,7 @@
 
             </nav>
             <!-- End of Topbar -->
-            {{$slot}}
+            @yield('content')
         </div>
         <!-- End of Main Content -->
 
